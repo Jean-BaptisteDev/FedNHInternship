@@ -1,0 +1,392 @@
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar10_Conv2Cifar_noniid-label-distribution_beta:0.3_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+Files already downloaded and verified
+Files already downloaded and verified
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar100_Conv2Cifar_noniid-label-distribution_beta:0.3_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+Files already downloaded and verified
+Files already downloaded and verified
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar100_Conv2Cifar_noniid-label-distribution_beta:1.0_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+Files already downloaded and verified
+Files already downloaded and verified
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar10_Conv2Cifar_noniid-label-distribution_beta:1.0_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+Files already downloaded and verified
+Files already downloaded and verified
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 239, in <module>
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 239, in <module>
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 239, in <module>
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 239, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 138, in run
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 138, in run
+    run(args)
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 138, in run
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 138, in run
+    clients_dict = setup_clients(ClientCstr, trainset, None, criterion,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/utils.py", line 88, in setup_clients
+    clients_dict = setup_clients(ClientCstr, trainset, None, criterion,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/utils.py", line 88, in setup_clients
+    clients_dict = setup_clients(ClientCstr, trainset, None, criterion,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/utils.py", line 88, in setup_clients
+    clients_dict = setup_clients(ClientCstr, trainset, None, criterion,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/utils.py", line 88, in setup_clients
+    all_clients_dict[cid] = Client(
+    all_clients_dict[cid] = Client(
+    all_clients_dict[cid] = Client(
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedNH.py", line 24, in __init__
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedNH.py", line 24, in __init__
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedNH.py", line 24, in __init__
+    all_clients_dict[cid] = Client(
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedNH.py", line 24, in __init__
+    super().__init__(criterion, trainset, testset,
+    super().__init__(criterion, trainset, testset,
+    super().__init__(criterion, trainset, testset,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 25, in __init__
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 25, in __init__
+    super().__init__(criterion, trainset, testset,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 25, in __init__
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 25, in __init__
+    self._initialize_model()
+    self._initialize_model()
+    self._initialize_model()
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 46, in _initialize_model
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 46, in _initialize_model
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 46, in _initialize_model
+    self._initialize_model()
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 46, in _initialize_model
+    self.model = eval(f"{self.client_config['model']}NH")(self.client_config).to(self.device)
+    self.model = eval(f"{self.client_config['model']}NH")(self.client_config).to(self.device)
+    self.model = eval(f"{self.client_config['model']}NH")(self.client_config).to(self.device)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 907, in to
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 907, in to
+    self.model = eval(f"{self.client_config['model']}NH")(self.client_config).to(self.device)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 907, in to
+    return self._apply(convert)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 907, in to
+    return self._apply(convert)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 578, in _apply
+    return self._apply(convert)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 578, in _apply
+    return self._apply(convert)
+    module._apply(fn)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 578, in _apply
+    module._apply(fn)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 578, in _apply
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 601, in _apply
+    module._apply(fn)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 601, in _apply
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 601, in _apply
+    module._apply(fn)
+    param_applied = fn(param)
+    param_applied = fn(param)
+    param_applied = fn(param)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 601, in _apply
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 905, in convert
+    param_applied = fn(param)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 905, in convert
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 905, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 905, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar100_Conv2Cifar_noniid-label-distribution_beta:0.3_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+Files already downloaded and verified
+Files already downloaded and verified
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar10_Conv2Cifar_noniid-label-distribution_beta:0.3_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+Files already downloaded and verified
+Files already downloaded and verified
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar100_Conv2Cifar_noniid-label-distribution_beta:1.0_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+Files already downloaded and verified
+Files already downloaded and verified
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 239, in <module>
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 239, in <module>
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 239, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 138, in run
+    run(args)
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 138, in run
+    clients_dict = setup_clients(ClientCstr, trainset, None, criterion,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 138, in run
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/utils.py", line 88, in setup_clients
+    clients_dict = setup_clients(ClientCstr, trainset, None, criterion,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/utils.py", line 88, in setup_clients
+    clients_dict = setup_clients(ClientCstr, trainset, None, criterion,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/utils.py", line 88, in setup_clients
+    all_clients_dict[cid] = Client(
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedNH.py", line 24, in __init__
+    all_clients_dict[cid] = Client(
+    all_clients_dict[cid] = Client(
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedNH.py", line 24, in __init__
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedNH.py", line 24, in __init__
+    super().__init__(criterion, trainset, testset,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 25, in __init__
+    super().__init__(criterion, trainset, testset,
+    super().__init__(criterion, trainset, testset,
+    self._initialize_model()
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 25, in __init__
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 25, in __init__
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 46, in _initialize_model
+    self._initialize_model()
+    self._initialize_model()
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 46, in _initialize_model
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 46, in _initialize_model
+    self.model = eval(f"{self.client_config['model']}NH")(self.client_config).to(self.device)
+    self.model = eval(f"{self.client_config['model']}NH")(self.client_config).to(self.device)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 907, in to
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 907, in to
+    return self._apply(convert)
+    return self._apply(convert)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 578, in _apply
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 578, in _apply
+    module._apply(fn)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 601, in _apply
+    module._apply(fn)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 601, in _apply
+    param_applied = fn(param)
+    param_applied = fn(param)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 905, in convert
+    self.model = eval(f"{self.client_config['model']}NH")(self.client_config).to(self.device)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 905, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 907, in to
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.    return self._apply(convert)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 578, in _apply
+
+    module._apply(fn)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 601, in _apply
+    param_applied = fn(param)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 905, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar10_Conv2Cifar_noniid-label-distribution_beta:1.0_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+Files already downloaded and verified
+Files already downloaded and verified
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 239, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 138, in run
+    clients_dict = setup_clients(ClientCstr, trainset, None, criterion,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/utils.py", line 88, in setup_clients
+    all_clients_dict[cid] = Client(
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedNH.py", line 24, in __init__
+    super().__init__(criterion, trainset, testset,
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 25, in __init__
+    self._initialize_model()
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/src/flbase/strategies/FedUH.py", line 46, in _initialize_model
+    self.model = eval(f"{self.client_config['model']}NH")(self.client_config).to(self.device)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 907, in to
+    return self._apply(convert)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 578, in _apply
+    module._apply(fn)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 601, in _apply
+    param_applied = fn(param)
+  File "/home/jbb/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 905, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/jbb/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libc10_hip.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar10_Conv2Cifar_noniid-label-distribution_beta:0.3_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+wandb: ERROR api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 251, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 130, in run
+    wandb.init(config=config, name=run_tag, project=args.purpose)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1178, in init
+    wandb._sentry.reraise(e)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 155, in reraise
+    raise exc.with_traceback(sys.exc_info()[2])
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1163, in init
+    wi.setup(kwargs)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 300, in setup
+    wandb_login._login(
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 334, in _login
+    wlogin.prompt_api_key()
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 263, in prompt_api_key
+    raise UsageError("api_key not configured (no-tty). call " + directive)
+wandb.errors.UsageError: api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar100_Conv2Cifar_noniid-label-distribution_beta:1.0_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+wandb: ERROR api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 251, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 130, in run
+    wandb.init(config=config, name=run_tag, project=args.purpose)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1178, in init
+    wandb._sentry.reraise(e)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 155, in reraise
+    raise exc.with_traceback(sys.exc_info()[2])
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1163, in init
+    wi.setup(kwargs)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 300, in setup
+    wandb_login._login(
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 334, in _login
+    wlogin.prompt_api_key()
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 263, in prompt_api_key
+    raise UsageError("api_key not configured (no-tty). call " + directive)
+wandb.errors.UsageError: api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 251, in <module>
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar100_Conv2Cifar_noniid-label-distribution_beta:0.3_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+wandb: ERROR api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 251, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 130, in run
+    wandb.init(config=config, name=run_tag, project=args.purpose)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1178, in init
+    wandb._sentry.reraise(e)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 155, in reraise
+    raise exc.with_traceback(sys.exc_info()[2])
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1163, in init
+    wi.setup(kwargs)
+    run(args)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 300, in setup
+    wandb_login._login(
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 130, in run
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 334, in _login
+    wlogin.prompt_api_key()
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 263, in prompt_api_key
+    raise UsageError("api_key not configured (no-tty). call " + directive)
+wandb.errors.UsageError: api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+    wandb.init(config=config, name=run_tag, project=args.purpose)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1178, in init
+    wandb._sentry.reraise(e)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 155, in reraise
+    raise exc.with_traceback(sys.exc_info()[2])
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1163, in init
+    wi.setup(kwargs)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 300, in setup
+    wandb_login._login(
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 334, in _login
+    wlogin.prompt_api_key()
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 263, in prompt_api_key
+    raise UsageError("api_key not configured (no-tty). call " + directive)
+wandb.errors.UsageError: api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 251, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 130, in run
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 251, in <module>
+    wandb.init(config=config, name=run_tag, project=args.purpose)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1178, in init
+    wandb._sentry.reraise(e)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 155, in reraise
+    raise exc.with_traceback(sys.exc_info()[2])
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1163, in init
+    run(args)
+    wi.setup(kwargs)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 130, in run
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 300, in setup
+    wandb_login._login(
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 334, in _login
+    wlogin.prompt_api_key()
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 263, in prompt_api_key
+    raise UsageError("api_key not configured (no-tty). call " + directive)
+wandb.errors.UsageError: api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+    wandb.init(config=config, name=run_tag, project=args.purpose)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1178, in init
+    wandb._sentry.reraise(e)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 155, in reraise
+    raise exc.with_traceback(sys.exc_info()[2])
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1163, in init
+    wi.setup(kwargs)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 300, in setup
+    wandb_login._login(
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 334, in _login
+    wlogin.prompt_api_key()
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 263, in prompt_api_key
+    raise UsageError("api_key not configured (no-tty). call " + directive)
+wandb.errors.UsageError: api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+results are saved in:  ./Cifar_FedNH/FedNH_Cifar10_Conv2Cifar_noniid-label-distribution_beta:1.0_num_clients:100_participate_ratio:0.1_global_seed:0_FedNH_smoothing:0.9_FedNH_client_adv_prototype_agg:False_no_norm:False
+wandb: ERROR api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 251, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 130, in run
+    wandb.init(config=config, name=run_tag, project=args.purpose)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1178, in init
+    wandb._sentry.reraise(e)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 155, in reraise
+    raise exc.with_traceback(sys.exc_info()[2])
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1163, in init
+    wi.setup(kwargs)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 300, in setup
+    wandb_login._login(
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 334, in _login
+    wlogin.prompt_api_key()
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 263, in prompt_api_key
+    raise UsageError("api_key not configured (no-tty). call " + directive)
+wandb.errors.UsageError: api_key not configured (no-tty). call wandb.login(key=[your_api_key])
+Traceback (most recent call last):
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 251, in <module>
+    run(args)
+  File "/mnt/c/Users/Jeaan/Desktop/Internship/FedNH/experiments/../main.py", line 130, in run
+    wandb.init(config=config, name=run_tag, project=args.purpose)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1178, in init
+    wandb._sentry.reraise(e)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/analytics/sentry.py", line 155, in reraise
+    raise exc.with_traceback(sys.exc_info()[2])
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 1163, in init
+    wi.setup(kwargs)
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_init.py", line 300, in setup
+    wandb_login._login(
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 334, in _login
+    wlogin.prompt_api_key()
+  File "/home/jbb/.local/lib/python3.10/site-packages/wandb/sdk/wandb_login.py", line 263, in prompt_api_key
+    raise UsageError("api_key not configured (no-tty). call " + directive)
+wandb.errors.UsageError: api_key not configured (no-tty). call wandb.login(key=[your_api_key])
