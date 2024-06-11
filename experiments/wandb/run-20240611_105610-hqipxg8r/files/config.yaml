@@ -1,0 +1,99 @@
+wandb_version: 1
+
+server_config:
+  desc: null
+  value:
+    strategy: FedNHPlus
+    num_rounds: 100
+    num_clients: 100
+    participate_ratio: 0.1
+    drop_ratio: 0.0
+    test_every: 1
+    split_testset: false
+    use_tqdm: false
+    dataset: Cifar10
+    partition: noniid-label-distribution
+    beta: '0.3'
+    num_classes_per_client: null
+    num_shards_per_client: null
+    num_classes: 10
+    learning_rate: 1.0
+    lr_decay_per_round: 1.0
+    exclude: []
+    FedNH_smoothing: 0.9
+    FedNH_server_adv_prototype_agg: false
+    FedNHPlus_smoothing: 0.9
+    FedNHPlus_server_adv_prototype_agg: false
+    CReFF_num_of_fl_feature: 100
+    CReFF_match_epoch: 100
+    CReFF_lr_net: 0.01
+    CReFF_lr_feature: 0.1
+    CReFF_crt_epoch: 300
+    CReFF_dis_metric: ours
+client_config:
+  desc: null
+  value:
+    model: Conv2Cifar
+    input_size:
+    - 3
+    - 32
+    - 32
+    num_classes: 10
+    num_epochs: 5
+    batch_size: 64
+    optimizer: SGD
+    learning_rate: 0.1
+    lr_scheduler: stepwise
+    lr_decay_per_round: 0.99
+    num_rounds: 100
+    use_tqdm: false
+    FedROD_hyper_clf: true
+    FedROD_phead_separate: false
+    FedNH_return_embedding: false
+    FedNH_head_init: orthogonal
+    FedNH_client_adv_prototype_agg: false
+    FedNH_fix_scaling: false
+    FedNHPlus_return_embedding: false
+    FedNHPlus_head_init: orthogonal
+    FedNHPlus_client_adv_prototype_agg: false
+    FedNHPlus_fix_scaling: false
+    FedProto_lambda: 0.1
+    FedRep_head_epochs: 10
+    FedBABU_finetune_epoch: 5
+    Ditto_lambda: 0.75
+    CReFF_batch_real: 64
+    global_seed: 0
+    client_lr: 0.01
+    client_lr_scheduler: diminishing
+    sgd_momentum: 0.9
+    sgd_weight_decay: 1.0e-05
+    use_sam: false
+    no_norm: true
+    FedNPlus_client_adv_prototype_agg: false
+_wandb:
+  desc: null
+  value:
+    python_version: 3.10.12
+    cli_version: 0.17.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1718078170
+    t:
+      1:
+      - 1
+      - 41
+      - 55
+      2:
+      - 1
+      - 41
+      - 55
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.10.12
+      5: 0.17.0
+      8:
+      - 5
+      13: linux-x86_64

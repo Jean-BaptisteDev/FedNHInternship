@@ -45,7 +45,7 @@ if __name__ == "__main__":
     purpose = 'Cifar'
     num_gpu = 4
     if purpose == 'TinyImageNet':
-        strategy_hyper = [('FedAvg', {'no_norm': False}), ('FedNH', {'no_norm': True}),
+        strategy_hyper = [('FedAvg', {'no_norm': False}), ('FedNH', {'no_norm': True}), ('FedNHPlus', {'no_norm': True}),
                           ('FedROD', {'FedROD_hyper_clf': False, 'FedROD_phead_separate': True, 'no_norm': False}), ('FedProto', {'no_norm': False}),
                           ('FedRep', {'no_norm': False}), ('FedBABU', {'FedBABU_finetune_epoch': 5, 'no_norm': False}),
                           ('FedPer', {'no_norm': False}), ('Ditto', {'Ditto_lambda': 0.75, 'no_norm': False}),
@@ -54,7 +54,7 @@ if __name__ == "__main__":
                           ]
         planned, actual = 0, 0
         yamlfile_lst = ['./TinyImageNet_ResNet.yaml']
-        num_round = 100
+        num_round = 200
         client_lr = 0.01
         client_lr_scheduler = 'diminishing'
         sgd_momentum = 0.9
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         print(f"actual/planned:{actual}/{planned}")
 
     if purpose == 'Cifar':
-        strategy_hyper = [('FedAvg', None), ('FedNH', None),
+        strategy_hyper = [('FedAvg', None), ('FedNH', None), ('FedNHPlus', {'no_norm': True}),
                           ('FedROD', {'FedROD_phead_separate': True}), ('FedProto', None),
                           ('FedRep', None), ('FedBABU', {'FedBABU_finetune_epoch': 5}),
                           ('FedPer', None), ('Ditto', {'Ditto_lambda': 0.75}),
@@ -102,7 +102,7 @@ if __name__ == "__main__":
                           ]
         yamlfile_lst = ['./Cifar10_Conv2Cifar.yaml', './Cifar100_Conv2Cifar.yaml']
         planned, actual = 0, 0
-        num_round = 100
+        num_round = 200
         client_lr = 0.01
         client_lr_scheduler = 'diminishing'
         sgd_momentum = 0.9

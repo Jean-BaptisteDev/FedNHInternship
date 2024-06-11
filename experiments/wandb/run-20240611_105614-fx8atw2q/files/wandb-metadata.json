@@ -1,0 +1,123 @@
+{
+    "os": "Linux-5.15.146.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-06-11T03:56:16.439628",
+    "startedAt": "2024-06-11T03:56:14.273052",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--purpose",
+        "Cifar",
+        "--device",
+        "cuda:0",
+        "--global_seed",
+        "0",
+        "--use_wandb",
+        "True",
+        "--yamlfile",
+        "./Cifar10_Conv2Cifar.yaml",
+        "--strategy",
+        "FedNHPlus",
+        "--num_clients",
+        "100",
+        "--participate_ratio",
+        "0.1",
+        "--partition",
+        "noniid-label-distribution",
+        "--beta",
+        "1.0",
+        "--num_rounds",
+        "100",
+        "--client_lr",
+        "0.01",
+        "--client_lr_scheduler",
+        "diminishing",
+        "--sgd_momentum",
+        "0.9",
+        "--sgd_weight_decay",
+        "1e-05",
+        "--num_epochs",
+        "5",
+        "--no_norm",
+        "True"
+    ],
+    "state": "running",
+    "program": "/mnt/c/Users/Jeaan/Desktop/Internship/FedNHGithub/experiments/../main.py",
+    "codePathLocal": null,
+    "codePath": "main.py",
+    "git": {
+        "remote": "https://github.com/Jean-BaptisteDev/FedNHInternship.git",
+        "commit": "f322832e3bcc7fcde51d83f0e1f370e3956eed39"
+    },
+    "email": null,
+    "root": "/mnt/c/Users/Jeaan/Desktop/Internship/FedNHGithub",
+    "host": "MSI",
+    "username": "jbb",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2304.006,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2304.006,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2304.006,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2304.006,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2304.006,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2304.006,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2304.006,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2304.006,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2304.006,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 13.09210205078125
+        }
+    },
+    "gpu": "NVIDIA GeForce GTX 1050 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1050 Ti",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 7.683662414550781
+    }
+}

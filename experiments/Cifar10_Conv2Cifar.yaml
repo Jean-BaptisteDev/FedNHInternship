@@ -36,6 +36,10 @@ server_config:
   FedNH_smoothing: 0.9
   FedNH_server_adv_prototype_agg: False
 
+  # FedNHPlus:
+  FedNHPlus_smoothing: 0.9
+  FedNHPlus_server_adv_prototype_agg: False
+
   # CReFF
   CReFF_num_of_fl_feature: 100
   CReFF_match_epoch: 100
@@ -80,6 +84,12 @@ client_config:
   FedNH_head_init: orthogonal
   FedNH_client_adv_prototype_agg: False
   FedNH_fix_scaling: False
+
+  # FedNHPlus
+  FedNHPlus_return_embedding: False
+  FedNHPlus_head_init: orthogonal
+  FedNHPlus_client_adv_prototype_agg: False
+  FedNHPlus_fix_scaling: False
 
   # FedProto
   FedProto_lambda: 0.1

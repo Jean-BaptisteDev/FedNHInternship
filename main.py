@@ -11,6 +11,7 @@ from src.utils import setup_seed, mkdirs, get_datasets, load_from_pkl, save_to_p
 from src.flbase.strategies.FedAvg import FedAvgClient, FedAvgServer
 from src.flbase.strategies.FedROD import FedRODClient, FedRODServer
 from src.flbase.strategies.FedNH import FedNHClient, FedNHServer
+from src.flbase.strategies.FedNHPlus import FedNHPlusClient, FedNHPlusServer
 from src.flbase.strategies.FedProto import FedProtoClient, FedProtoServer
 from src.flbase.strategies.FedRep import FedRepClient, FedRepServer
 from src.flbase.strategies.FedBABU import FedBABUClient, FedBABUServer
@@ -65,7 +66,10 @@ def run(args):
         partition_arg = f'num_shards_per_client:{args.num_shards_per_client}'
     else:
         raise ValueError('not implemented partition')
-
+    
+    #compute 1+1
+    
+    
     if args.strategy == 'FedAvg':
         ClientCstr, ServerCstr = FedAvgClient, FedAvgServer
         hyper_params = None
@@ -80,6 +84,12 @@ def run(args):
         server_config['FedNH_server_adv_prototype_agg'] = args.FedNH_server_adv_prototype_agg
         client_config['FedNH_client_adv_prototype_agg'] = args.FedNH_client_adv_prototype_agg
         hyper_params = f"FedNH_smoothing:{args.FedNH_smoothing}_FedNH_client_adv_prototype_agg:{args.FedNH_client_adv_prototype_agg}"
+    elif args.strategy == 'FedNHPlus':
+        ClientCstr, ServerCstr = FedNHPlusClient, FedNHPlusServer
+        server_config['FedNHPlus_smoothing'] = args.FedNHPlus_smoothing
+        server_config['FedNHPlus_server_adv_prototype_agg'] = args.FedNHPlus_server_adv_prototype_agg
+        client_config['FedNPlus_client_adv_prototype_agg'] = args.FedNHPlus_client_adv_prototype_agg
+        hyper_params = f"FedNHPlus_smoothing:{args.FedNHPlus_smoothing}_FedNHPlus_client_adv_prototype_agg:{args.FedNHPlus_client_adv_prototype_agg}"
     elif args.strategy == 'FedProto':
         ClientCstr, ServerCstr = FedProtoClient, FedProtoServer
         client_config['FedProto_lambda'] = args.FedProto_lambda
@@ -221,6 +231,10 @@ if __name__ == "__main__":
     parser.add_argument('--FedNH_smoothing', default=0.9, type=float, help='moving average parameters')
     parser.add_argument('--FedNH_server_adv_prototype_agg', default=False, type=lambda x: (str(x).lower() in ['true', '1', 'yes']), help='FedNH server adv agg')
     parser.add_argument('--FedNH_client_adv_prototype_agg', default=False, type=lambda x: (str(x).lower() in ['true', '1', 'yes']), help='FedNH client adv agg')
+
+    parser.add_argument('--FedNHPlus_smoothing', default=0.9, type=float, help='moving average parameters')
+    parser.add_argument('--FedNHPlus_server_adv_prototype_agg', default=False, type=lambda x: (str(x).lower() in ['true', '1', 'yes']), help='FedNHPlus server adv agg')
+    parser.add_argument('--FedNHPlus_client_adv_prototype_agg', default=False, type=lambda x: (str(x).lower() in ['true', '1', 'yes']), help='FedNHPlus client adv agg')
 
     parser.add_argument('--FedROD_hyper_clf', default=True, type=lambda x: (str(x).lower() in ['true', '1', 'yes']), help='FedRod phead uses hypernetwork')
     parser.add_argument('--FedROD_phead_separate', default=False, type=lambda x: (str(x).lower()
