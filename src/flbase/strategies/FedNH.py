@@ -23,6 +23,10 @@ import seaborn as sns
 import os
 import plotly.express as px
 from scipy.spatial import ConvexHull
+from sklearn.neighbors import NearestNeighbors
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+
 
 
 class FedNHClient(FedUHClient):
@@ -166,9 +170,7 @@ class FedNHClient(FedUHClient):
         embeddings = torch.cat(embeddings, dim=0)
         labels = torch.cat(labels, dim=0)
         return embeddings, labels
-    
-    
-import os
+
 
 class FedNHServer(FedUHServer):
     """Server class for Federated NH (FedNH) algorithm."""
@@ -185,6 +187,7 @@ class FedNHServer(FedUHServer):
         """
         super().__init__(server_config, clients_dict, exclude, **kwargs)
         self.visualization_dir = self.create_simulation_directory()
+        self.visualization_rounds = [1, 50, 150, 200]
 
     def create_simulation_directory(self):
         """
@@ -325,9 +328,68 @@ class FedNHServer(FedUHServer):
         except Exception as e:
             print(f"Failed to save prototype weights visualization: {e}")
 
+    def calculate_cluster_density(self, embeddings, labels):
+        """
+        Calculate cluster density for each class.
+
+        Args:
+        - embeddings (np.ndarray): Embeddings of the data points.
+        - labels (np.ndarray): Labels corresponding to the embeddings.
+
+        Returns:
+        - class_densities (dict): Dictionary containing class indices and their corresponding densities.
+        """
+        class_densities = {}
+        unique_labels = np.unique(labels)
+        for label in unique_labels:
+            mask = labels == label
+            if np.sum(mask) > 1:
+                points = embeddings[mask]
+                nbrs = NearestNeighbors(n_neighbors=2).fit(points)
+                distances, _ = nbrs.kneighbors(points)
+                mean_distance = np.mean(distances[:, 1])  # Mean distance to the nearest neighbor
+                density = 1 / mean_distance if mean_distance > 0 else 0  # Inverse mean distance as density measure
+            else:
+                density = 0  # If only one point, density is 0
+            class_densities[label] = density
+        return class_densities
+
+    def visualize_cluster_density(self, embeddings, labels, round_num):
+        """
+        Visualize cluster density using a bar plot.
+
+        Args:
+        - embeddings (torch.Tensor): Embeddings of the data points.
+        - labels (torch.Tensor): Labels corresponding to the embeddings.
+        - round_num (int): Current round number for visualization.
+        """
+        embeddings = embeddings.cpu().numpy()
+        labels = labels.cpu().numpy()
+        class_densities = self.calculate_cluster_density(embeddings, labels)
+
+        plt.figure(figsize=(10, 8))
+        plt.bar(class_densities.keys(), class_densities.values(), alpha=0.7)
+        plt.xlabel('Class')
+        plt.ylabel('Cluster Density')
+        plt.title(f'Cluster Density for Each Class (Round {round_num})')
+        visualization_path = os.path.join(self.visualization_dir, f"cluster_density_round_{round_num}.png")
+
+        try:
+            plt.savefig(visualization_path)
+            plt.close()
+            print(f"Cluster density visualization saved to {visualization_path}")
+
+            # Verify the file has been created
+            if os.path.exists(visualization_path):
+                print(f"Verified that the file {visualization_path} exists.")
+            else:
+                print(f"Error: The file {visualization_path} does not exist after saving.")
+        except Exception as e:
+            print(f"Failed to save cluster density visualization: {e}")
+
     def visualize_client_data_clusters(self, client_uploads, round_num, num_points_per_class=100):
         """
-        Visualizes customer data clusters using t-SNE, excluding class prototypes.
+        Visualizes client data clusters using t-SNE, excluding class prototypes.
 
         Args:
         - client_uploads (list): List of client uploads.
@@ -377,7 +439,11 @@ class FedNHServer(FedUHServer):
         fig.write_html(visualization_path)
         print(f"Interactive t-SNE of client data clusters saved to {visualization_path}")
 
+        # Visualize cluster density
+        self.visualize_cluster_density(torch.tensor(sampled_embeddings), torch.tensor(sampled_labels), round_num)
 
+
+            
     def aggregate(self, client_uploads, round):
         """
         Aggregates updates from clients to update the server model.
@@ -473,3 +539,5 @@ class FedNHServer(FedUHServer):
             # Visualize client distribution and data clusters
             self.client_distribution_visualization(client_uploads, round)
             self.visualize_client_data_clusters(client_uploads, round)
+                        
+
