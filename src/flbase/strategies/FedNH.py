@@ -26,6 +26,8 @@ from scipy.spatial import ConvexHull
 from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
+import random
+
 
 
 
@@ -443,7 +445,58 @@ class FedNHServer(FedUHServer):
         self.visualize_cluster_density(torch.tensor(sampled_embeddings), torch.tensor(sampled_labels), round_num)
 
 
-            
+    # def visualize_client_data_clusters_separately(self, client_uploads, round_num, num_points_per_class=100, max_clients=10):
+    #     """
+    #     Visualizes client data clusters separately using t-SNE.
+
+    #     Args:
+    #     - client_uploads (list): List of client uploads.
+    #     - round_num (int): Current round number for viewing.
+    #     - num_points_per_class (int): Number of points to sample per class.
+    #     - max_clients (int): Maximum number of clients to visualize.
+    #     """
+    #     active_clients = list(self.clients_dict.items())
+    #     if len(active_clients) > max_clients:
+    #         active_clients = random.sample(active_clients, max_clients)
+
+    #     for client_id, client in active_clients:
+    #         embeddings, labels = client.get_embeddings_and_labels()
+    #         embeddings = embeddings.cpu().numpy()
+    #         labels = labels.cpu().numpy()
+
+    #         # Sample points for better readability
+    #         sampled_embeddings = []
+    #         sampled_labels = []
+    #         unique_labels = np.unique(labels)
+    #         for label in unique_labels:
+    #             label_indices = np.where(labels == label)[0]
+    #             sampled_indices = np.random.choice(label_indices, min(num_points_per_class, len(label_indices)), replace=False)
+    #             sampled_embeddings.append(embeddings[sampled_indices])
+    #             sampled_labels.append(labels[sampled_indices])
+
+    #         sampled_embeddings = np.vstack(sampled_embeddings)
+    #         sampled_labels = np.hstack(sampled_labels)
+
+    #         tsne = TSNE(n_components=2, random_state=42, perplexity=30)
+    #         tsne_results = tsne.fit_transform(sampled_embeddings)
+
+    #         plt.figure(figsize=(10, 8))
+    #         for label in set(sampled_labels):
+    #             mask = sampled_labels == label
+    #             plt.scatter(tsne_results[mask, 0], tsne_results[mask, 1], alpha=0.5, label=f'Class {label}')
+    #         plt.title(f't-SNE of Client {client_id} Data Clusters')
+    #         plt.legend()
+    #         visualization_path = os.path.join(self.visualization_dir, f"client_{client_id}_data_clusters_round_{round_num}.png")
+    #         plt.savefig(visualization_path)
+    #         plt.close()
+    #         print(f"Client {client_id} data clusters t-SNE saved to {visualization_path}")
+
+    #         # Interactive plot using Plotly
+    #         fig = px.scatter(x=tsne_results[:, 0], y=tsne_results[:, 1], color=sampled_labels, title=f't-SNE of Client {client_id} Data Clusters')
+    #         visualization_path = os.path.join(self.visualization_dir, f"client_{client_id}_data_clusters_round_{round_num}_interactive.html")
+    #         fig.write_html(visualization_path)
+    #         print(f"Interactive t-SNE of client {client_id} data clusters saved to {visualization_path}")
+
     def aggregate(self, client_uploads, round):
         """
         Aggregates updates from clients to update the server model.
@@ -537,7 +590,11 @@ class FedNHServer(FedUHServer):
             self.tsne_visualization(temp, list(range(self.server_config['num_classes'])), round, tag='final')
 
             # Visualize client distribution and data clusters
-            self.client_distribution_visualization(client_uploads, round)
-            self.visualize_client_data_clusters(client_uploads, round)
+            if round in self.visualization_rounds:
+                self.client_distribution_visualization(client_uploads, round)
+                self.visualize_client_data_clusters(client_uploads, round)
                         
 
+            # # Visualize individual client data clusters
+            # if round in self.visualization_rounds:
+            #     self.visualize_client_data_clusters_separately(client_uploads, round)
