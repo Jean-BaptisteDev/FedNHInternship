@@ -93,12 +93,15 @@ class FedNHClient(FedUHClient):
 
     def _estimate_prototype_adv(self):
         """
-        Estimates prototype vectors using advanced aggregation method.
+        Estimates prototype vectors based on class distributions.
+
+        This method computes the prototypes for each class by taking into account the class densities. 
+        It adjusts the weights of embeddings according to the density of each class and normalizes the prototype vectors.
 
         Returns:
-        - to_share (dict): Dictionary containing adv_agg_prototype and count_by_class_full.
-          - adv_agg_prototype (torch.Tensor): Advanced aggregated prototype vectors.
-          - count_by_class_full (torch.Tensor): Full count of samples per class.
+        - to_share (dict): Dictionary containing 'adv_agg_prototype' and 'count_by_class_full'.
+        - adv_agg_prototype (torch.Tensor): Scaled prototype vectors for each class.
+        - count_by_class_full (torch.Tensor): Full count of samples per class.
         """
         self.model.eval()
         self.model.return_embedding = True
@@ -106,31 +109,38 @@ class FedNHClient(FedUHClient):
         labels = []
         weights = []
         prototype = torch.zeros_like(self.model.prototype)
+        
         with torch.no_grad():
             for i, (x, y) in enumerate(self.trainloader):
-                # forward pass
                 x, y = x.to(self.device), y.to(self.device)
-                # feature_embedding is normalized
-                # use the latest prototype
                 feature_embedding, logits = self.model.forward(x)
                 prob_ = F.softmax(logits, dim=1)
                 prob = torch.gather(prob_, dim=1, index=y.view(-1, 1))
                 labels.append(y)
                 weights.append(prob)
                 embeddings.append(feature_embedding)
-        self.model.return_embedding = True
+
         embeddings = torch.cat(embeddings, dim=0)
         labels = torch.cat(labels, dim=0)
         weights = torch.cat(weights, dim=0).view(-1, 1)
+        
+        # Calculate density, excluding the top 10% most distant points
+        class_densities = self.server.calculate_cluster_density(embeddings.cpu().numpy(), labels.cpu().numpy())
+        
         for cls in self.count_by_class.keys():
             mask = (labels == cls)
-            weights_in_cls = weights[mask, :]
+            density_weight = class_densities.get(cls, 1)
+            weights_in_cls = weights[mask, :] * density_weight
             feature_embedding_in_cls = embeddings[mask, :]
-            prototype[cls] = torch.sum(feature_embedding_in_cls * weights_in_cls, dim=0) / torch.sum(weights_in_cls)
+            
+            if torch.sum(weights_in_cls) > 0:
+                prototype[cls] = torch.sum(feature_embedding_in_cls * weights_in_cls, dim=0) / torch.sum(weights_in_cls)
+            else:
+                prototype[cls] = torch.sum(feature_embedding_in_cls, dim=0)
+
             prototype_cls_norm = torch.norm(prototype[cls]).clamp(min=1e-12)
             prototype[cls] = torch.div(prototype[cls], prototype_cls_norm)
 
-        # calculate predictive power
         to_share = {'adv_agg_prototype': prototype, 'count_by_class_full': self.count_by_class_full}
         return to_share
 
@@ -147,6 +157,7 @@ class FedNHClient(FedUHClient):
             return self.new_state_dict, self._estimate_prototype_adv()
         else:
             return self.new_state_dict, self._estimate_prototype()
+        
         
     def get_embeddings_and_labels(self):
         """
@@ -239,11 +250,11 @@ class FedNHServer(FedUHServer):
         plt.close()
         print(f"t-SNE with alpha transparency saved to {visualization_path}")
 
-        # Interactive plot using Plotly
-        fig = px.scatter(x=tsne_results[:, 0], y=tsne_results[:, 1], color=labels, title='t-SNE of Class Prototypes')
-        visualization_path = os.path.join(self.visualization_dir, f"tsne_round_{round_num}_{tag}_interactive.html")
-        fig.write_html(visualization_path)
-        print(f"Interactive t-SNE plot saved to {visualization_path}")
+        # # Interactive plot using Plotly
+        # fig = px.scatter(x=tsne_results[:, 0], y=tsne_results[:, 1], color=labels, title='t-SNE of Class Prototypes')
+        # visualization_path = os.path.join(self.visualization_dir, f"tsne_round_{round_num}_{tag}_interactive.html")
+        # fig.write_html(visualization_path)
+        # print(f"Interactive t-SNE plot saved to {visualization_path}")
 
         # Cluster boundaries using Convex Hulls
         plt.figure(figsize=(10, 8))
@@ -330,29 +341,55 @@ class FedNHServer(FedUHServer):
 
     def calculate_cluster_density(self, embeddings, labels):
         """
-        Calculate cluster density for each class.
+        Calculates the cluster density for each class after excluding the 10% most outlying points, 
+        and normalizes it between 0 and 1.
 
         Args:
         - embeddings (np.ndarray): Embeddings of the data points.
         - labels (np.ndarray): Labels corresponding to the embeddings.
 
         Returns:
-        - class_densities (dict): Dictionary containing class indices and their corresponding densities.
+        - class_densities (dict): Dictionary containing class indices and their normalized densities.
         """
         class_densities = {}
         unique_labels = np.unique(labels)
+        all_densities = []
+
+        # Calculate density for each class
         for label in unique_labels:
             mask = labels == label
             if np.sum(mask) > 1:
                 points = embeddings[mask]
                 nbrs = NearestNeighbors(n_neighbors=2).fit(points)
                 distances, _ = nbrs.kneighbors(points)
-                mean_distance = np.mean(distances[:, 1])  # Mean distance to the nearest neighbor
-                density = 1 / mean_distance if mean_distance > 0 else 0  # Inverse mean distance as density measure
+                
+                # Sort distances and exclude the top 10% outliers
+                sorted_distances = np.sort(distances[:, 1])
+                cutoff_index = int(0.9 * len(sorted_distances))
+                trimmed_distances = sorted_distances[:cutoff_index]
+                
+                mean_distance = np.mean(trimmed_distances)  # Average distance after trimming
+                density = 1 / mean_distance if mean_distance > 0 else 0  # Inverse of the average distance as a density measure
             else:
                 density = 0  # If only one point, density is 0
+
             class_densities[label] = density
+            all_densities.append(density)
+
+        # Normalize densities between 0 and 1
+        min_density = min(all_densities)
+        max_density = max(all_densities)
+        range_density = max_density - min_density
+
+        if range_density > 0:
+            for label in class_densities:
+                class_densities[label] = (class_densities[label] - min_density) / range_density
+        else:
+            for label in class_densities:
+                class_densities[label] = 0  # If all densities are the same, normalize all to 0
+
         return class_densities
+
 
     def visualize_cluster_density(self, embeddings, labels, round_num):
         """
@@ -433,11 +470,11 @@ class FedNHServer(FedUHServer):
         plt.close()
         print(f"Client data clusters t-SNE saved to {visualization_path}")
 
-        # Interactive plot using Plotly
-        fig = px.scatter(x=tsne_results[:, 0], y=tsne_results[:, 1], color=sampled_labels, title='t-SNE of Client Data Clusters')
-        visualization_path = os.path.join(self.visualization_dir, f"client_data_clusters_round_{round_num}_interactive.html")
-        fig.write_html(visualization_path)
-        print(f"Interactive t-SNE of client data clusters saved to {visualization_path}")
+        # # Interactive plot using Plotly
+        # fig = px.scatter(x=tsne_results[:, 0], y=tsne_results[:, 1], color=sampled_labels, title='t-SNE of Client Data Clusters')
+        # visualization_path = os.path.join(self.visualization_dir, f"client_data_clusters_round_{round_num}_interactive.html")
+        # fig.write_html(visualization_path)
+        # print(f"Interactive t-SNE of client data clusters saved to {visualization_path}")
 
         # Visualize cluster density
         self.visualize_cluster_density(torch.tensor(sampled_embeddings), torch.tensor(sampled_labels), round_num)
@@ -452,7 +489,7 @@ class FedNHServer(FedUHServer):
         - round_num (int): Current round number for visualization.
         - num_points_per_class (int): Number of points to sample per class.
         """
-        for client_idx, client in enumerate(self.clients_dict.values()):
+        for client_idx, client in enumerate(list(self.clients_dict.values())[:10]):
             embeddings, labels = client.get_embeddings_and_labels()
             embeddings = embeddings.cpu().numpy()
             labels = labels.cpu().numpy()
@@ -484,17 +521,65 @@ class FedNHServer(FedUHServer):
             plt.close()
             print(f"Client {client_idx + 1} data clusters t-SNE saved to {visualization_path}")
 
-            # Interactive plot using Plotly
-            fig = px.scatter(x=tsne_results[:, 0], y=tsne_results[:, 1], color=sampled_labels,
-                             title=f't-SNE of Client {client_idx + 1} Data Clusters (Round {round_num})')
-            visualization_path = os.path.join(self.visualization_dir, f"client_{client_idx + 1}_data_clusters_round_{round_num}_interactive.html")
-            fig.write_html(visualization_path)
-            print(f"Interactive t-SNE of client {client_idx + 1} data clusters saved to {visualization_path}")
+            # # Interactive plot using Plotly
+            # fig = px.scatter(x=tsne_results[:, 0], y=tsne_results[:, 1], color=sampled_labels,
+            #                  title=f't-SNE of Client {client_idx + 1} Data Clusters (Round {round_num})')
+            # visualization_path = os.path.join(self.visualization_dir, f"client_{client_idx + 1}_data_clusters_round_{round_num}_interactive.html")
+            # fig.write_html(visualization_path)
+            # print(f"Interactive t-SNE of client {client_idx + 1} data clusters saved to {visualization_path}")
 
             # Visualize cluster density
             self.visualize_cluster_density(torch.tensor(sampled_embeddings), torch.tensor(sampled_labels), round_num)
      
-     
+    def visualize_client_cluster_density(self, round_num, num_points_per_class=100):
+        """
+        Visualizes cluster density for each client separately using a bar plot.
+
+        Args:
+        - round_num (int): Current round number for visualization.
+        - num_points_per_class (int): Number of points to sample per class.
+        """
+        for client_idx, client in enumerate(list(self.clients_dict.values())[:10]):
+            embeddings, labels = client.get_embeddings_and_labels()
+            embeddings = embeddings.cpu().numpy()
+            labels = labels.cpu().numpy()
+
+            # Sample points for better readability
+            sampled_embeddings = []
+            sampled_labels = []
+            unique_labels = np.unique(labels)
+            for label in unique_labels:
+                label_indices = np.where(labels == label)[0]
+                sampled_indices = np.random.choice(label_indices, min(num_points_per_class, len(label_indices)), replace=False)
+                sampled_embeddings.append(embeddings[sampled_indices])
+                sampled_labels.append(labels[sampled_indices])
+
+            sampled_embeddings = np.vstack(sampled_embeddings)
+            sampled_labels = np.hstack(sampled_labels)
+
+            class_densities = self.calculate_cluster_density(sampled_embeddings, sampled_labels)
+
+            plt.figure(figsize=(10, 8))
+            plt.bar(class_densities.keys(), class_densities.values(), alpha=0.7)
+            plt.xlabel('Class')
+            plt.ylabel('Cluster Density')
+            plt.title(f'Cluster Density for Client {client_idx + 1} (Round {round_num})')
+            visualization_path = os.path.join(self.visualization_dir, f"client_{client_idx + 1}_cluster_density_round_{round_num}.png")
+
+            try:
+                plt.savefig(visualization_path)
+                plt.close()
+                print(f"Client {client_idx + 1} cluster density visualization saved to {visualization_path}")
+
+                # Verify the file has been created
+                if os.path.exists(visualization_path):
+                    print(f"Verified that the file {visualization_path} exists.")
+                else:
+                    print(f"Error: The file {visualization_path} does not exist after saving.")
+            except Exception as e:
+                print(f"Failed to save cluster density visualization: {e}")
+            
+            
     # def confusion_matrix_visualization(self, embeddings, labels, round_num):
     #     """
     #     Visualizes the confusion matrix based on the model predictions.
@@ -625,10 +710,13 @@ class FedNHServer(FedUHServer):
             # Visualize t-SNE representation of the final prototypes
             self.tsne_visualization(temp, list(range(self.server_config['num_classes'])), round, tag='final')
             self.visualize_client_clusters_separately(client_uploads, round)
+            self.visualize_client_cluster_density(round)
+            self.client_distribution_visualization(client_uploads, round)
+            self.visualize_client_data_clusters(client_uploads, round)
             
-            # Visualize client distribution and data clusters
-            if round in self.visualization_rounds:
-                self.client_distribution_visualization(client_uploads, round)
-                self.visualize_client_data_clusters(client_uploads, round)
+            # # Visualize client distribution and data clusters
+            # if round in self.visualization_rounds:
+            #     self.client_distribution_visualization(client_uploads, round)
+            #     self.visualize_client_data_clusters(client_uploads, round)
                 
 
